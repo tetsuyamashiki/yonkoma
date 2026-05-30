@@ -3977,7 +3977,7 @@ const COMICS = [
     "title": "学校が好きなのか嫌いなのか",
     "date": "2025-12-10",
     "year": "2025",
-    "tag": "次男",
+    "tag": "長男",
     "url": "https://note.com/tetsuyama4ki/n/n569d8d9a4c0b",
     "img": "243.jpg",
     "imgs": [
@@ -4193,7 +4193,7 @@ const COMICS = [
     "title": "少し世界史に興味がある9歳次男へ新大陸発見の話をする",
     "date": "2026-02-05",
     "year": "2026",
-    "tag": "次男",
+    "tag": "社会",
     "url": "https://note.com/tetsuyama4ki/n/n2de22d05859d",
     "img": "256.jpg",
     "imgs": [
@@ -4275,7 +4275,7 @@ const COMICS = [
     "title": "9歳次男、世界情勢に怒る。",
     "date": "2026-02-12",
     "year": "2026",
-    "tag": "次男",
+    "tag": "社会",
     "url": "https://note.com/tetsuyama4ki/n/n6745abf60f05",
     "img": "261.jpg",
     "imgs": [
@@ -4565,6 +4565,32 @@ const COMICS = [
     ],
     "srcFiles": [
       "nb60d4e77d8bc_1773031530-JwjcpSLvQgde0FUzmtihnIPH.jpg"
+    ]
+  },
+  {
+    "id": 279,
+    "no": "279",
+    "title": "次男の平日の朝",
+    "date": "2025-04-22",
+    "year": "2025",
+    "tag": "次男",
+    "url": "https://note.com/tetsuyama4ki/n/naa9dd03e613b",
+    "img": "279.webp",
+    "imgs": [
+      "279.webp"
+    ]
+  },
+  {
+    "id": 280,
+    "no": "280",
+    "title": "9歳次男が同級生を連れてきた",
+    "date": "2025-12-15",
+    "year": "2025",
+    "tag": "次男",
+    "url": "https://note.com/tetsuyama4ki/n/na29663fc411a",
+    "img": "280.webp",
+    "imgs": [
+      "280.webp"
     ]
   }
 ];
