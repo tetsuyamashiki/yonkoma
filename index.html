@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>てつやま四季 — 4コマ漫画アーカイブ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ── リセット & 変数 ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:    #1c1c1a;
+  --sub:    #6b6b67;
+  --line:   #e2e2de;
+  --bg:     #f8f8f6;
+  --white:  #ffffff;
+  --accent: #1c1c1a;
+
+  --tag-child:    #f5f0e8;
+  --tag-sibling:  #eaf0ea;
+  --tag-wife:     #f5eaed;
+  --tag-event:    #eaeef5;
+  --tag-society:  #f0eaf5;
+
+  --font-serif: 'Shippori Mincho', serif;
+  --font-sans:  'Noto Sans JP', sans-serif;
+  --font-mono:  'DM Mono', monospace;
+
+  --nav-h: 56px;
+  --max-w: 1080px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── ナビ ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  height: var(--nav-h);
+  background: rgba(248,248,246,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center;
+}
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+}
+.nav-logo span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--sub);
+  margin-left: 8px;
+  letter-spacing: .1em;
+}
+.nav-links {
+  display: flex; gap: 4px; list-style: none;
+}
+.nav-links li a {
+  display: block;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--sub);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color .2s, background .2s;
+  letter-spacing: .03em;
+  cursor: pointer;
+}
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: var(--ink);
+  background: var(--line);
+}
+.hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 22px; height: 1.5px; background: var(--ink);
+  transition: transform .3s, opacity .3s;
+}
+
+/* ── ページコンテナ ── */
+.page { display: none; min-height: 100vh; padding-top: var(--nav-h); }
+.page.active { display: block; }
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+/* ── セクションヘッダ ── */
+.section-header {
+  padding: 52px 0 32px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 40px;
+}
+.section-header h1 {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  line-height: 1.3;
+}
+.section-header p {
+  margin-top: 8px;
+  color: var(--sub);
+  font-size: 13px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   HOME
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.home-hero {
+  padding: 64px 0 48px;
+  border-bottom: 1px solid var(--line);
+}
+.home-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.home-hero-text h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: .02em;
+}
+.home-hero-text h1 em {
+  font-style: normal;
+  color: var(--sub);
+  font-size: .65em;
+  font-weight: 400;
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  letter-spacing: .12em;
+}
+.home-hero-text p {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--sub);
+  line-height: 1.9;
+  max-width: 360px;
+}
+.home-stats {
+  display: flex; gap: 32px; margin-top: 32px;
+}
+.home-stat-item {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.home-stat-item .num {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+}
+.home-stat-item .lbl {
+  font-size: 11px;
+  color: var(--sub);
+  letter-spacing: .06em;
+}
+
+/* 最新作カード */
+.latest-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.latest-card-thumb {
+  aspect-ratio: 1/1;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.latest-card-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.latest-thumb-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; color: var(--line); height: 100%;
+}
+.latest-thumb-placeholder svg { opacity: .4; }
+.latest-card-body {
+  padding: 20px 24px;
+  border-top: 1px solid var(--line);
+}
+.latest-card-body .tag-badge { margin-bottom: 8px; }
+.latest-card-body h2 {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.latest-card-meta {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.latest-card-meta .date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--sub);
+}
+.btn-note {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 12px;
+  text-decoration: none;
+  transition: opacity .2s;
+  letter-spacing: .04em;
+}
+.btn-note:hover { opacity: .75; }
+.btn-note svg { flex-shrink: 0; }
+
+/* ホームナビグリッド */
+.home-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 40px 0 64px;
+}
+.home-nav-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 28px 20px;
+  cursor: pointer;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  text-align: center;
+}
+.home-nav-card:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.home-nav-card .icon {
+  font-size: 24px; margin-bottom: 12px; display: block;
+}
+.home-nav-card h3 {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.home-nav-card p {
+  font-size: 11px;
+  color: var(--sub);
+  line-height: 1.6;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   今日の4コマ（最新作）
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.today-wrap {
+  padding: 52px 0 80px;
+}
+.today-card {
+  max-width: 560px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.today-card-thumb {
+  aspect-ratio: 1/1;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+}
+.today-card-body { padding: 28px 32px 32px; }
+.today-card-body .tag-badge { margin-bottom: 12px; }
+.today-card-body h2 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.today-meta {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 24px;
+}
+.today-meta .date {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--sub);
+}
+.today-meta .no {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--line);
+  border: 1px solid var(--line);
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   ランダム
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.random-wrap { padding: 52px 0 80px; text-align: center; }
+.random-card {
+  max-width: 560px; margin: 0 auto 32px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px; overflow: hidden;
+  text-align: left;
+}
+.random-card-thumb {
+  aspect-ratio: 1/1; background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+}
+.random-card-body { padding: 28px 32px 32px; }
+.random-card-body .tag-badge { margin-bottom: 10px; }
+.random-card-body h2 {
+  font-family: var(--font-serif);
+  font-size: 20px; font-weight: 600;
+  line-height: 1.5; margin-bottom: 8px;
+}
+.random-meta {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+}
+.random-meta .date { font-family: var(--font-mono); font-size: 12px; color: var(--sub); }
+.btn-random {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px;
+  border: 1.5px solid var(--ink);
+  background: transparent; color: var(--ink);
+  border-radius: 4px; font-size: 13px;
+  cursor: pointer; transition: background .2s, color .2s;
+  font-family: var(--font-sans);
+}
+.btn-random:hover { background: var(--ink); color: var(--white); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   テーマから読む
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.theme-tags-bar {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px;
+}
+.theme-filter-btn {
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1.5px solid var(--line);
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--sub);
+  cursor: pointer;
+  transition: all .2s;
+}
+.theme-filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+.theme-filter-btn.active {
+  background: var(--ink); border-color: var(--ink);
+  color: var(--white);
+}
+.theme-count {
+  font-family: var(--font-mono);
+  font-size: 11px; margin-left: 4px;
+}
+
+/* カードグリッド */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 64px;
+}
+.comic-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  display: flex; flex-direction: column;
+}
+.comic-card:hover {
+  border-color: #aaa;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,0,0,.07);
+}
+.comic-card-thumb { cursor: zoom-in; }
+.comic-card-thumb {
+  aspect-ratio: 1/1;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
+}
+.comic-card-thumb .thumb-no {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--line);
+  position: absolute; bottom: 8px; right: 10px;
+}
+.comic-card-body {
+  padding: 12px 14px 14px;
+  flex: 1; display: flex; flex-direction: column;
+}
+.comic-card-body .tag-badge { margin-bottom: 6px; }
+.comic-card-body h3 {
+  font-family: var(--font-serif);
+  font-size: 13px; font-weight: 600;
+  line-height: 1.55; flex: 1;
+}
+.comic-card-body .card-date {
+  font-family: var(--font-mono);
+  font-size: 10px; color: var(--sub);
+  margin-top: 8px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   年代アーカイブ
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.archive-year-tabs {
+  display: flex; gap: 4px; margin-bottom: 36px;
+  border-bottom: 1px solid var(--line);
+}
+.year-tab {
+  padding: 10px 20px;
+  border: none; background: none;
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--sub); cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color .2s, border-color .2s;
+}
+.year-tab:hover { color: var(--ink); }
+.year-tab.active {
+  color: var(--ink); border-bottom-color: var(--ink); font-weight: 500;
+}
+.archive-month-section { margin-bottom: 40px; }
+.archive-month-label {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .1em;
+  color: var(--sub); margin-bottom: 12px;
+  padding-bottom: 6px; border-bottom: 1px solid var(--line);
+}
+.archive-list { display: flex; flex-direction: column; gap: 1px; }
+.archive-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background .15s;
+  border-radius: 4px;
+  padding-left: 8px; padding-right: 8px;
+}
+.archive-item:hover { background: var(--white); }
+.archive-item .a-no {
+  font-family: var(--font-mono);
+  font-size: 10px; color: var(--line);
+  width: 30px; flex-shrink: 0;
+}
+.archive-item .a-date {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--sub);
+  width: 80px; flex-shrink: 0;
+}
+.archive-item .a-title {
+  font-family: var(--font-serif);
+  font-size: 14px; font-weight: 500;
+  flex: 1; line-height: 1.5;
+}
+.archive-item .tag-badge { flex-shrink: 0; }
+.archive-item .a-link {
+  flex-shrink: 0; opacity: 0;
+  transition: opacity .2s;
+  color: var(--sub); font-size: 11px; text-decoration: none;
+}
+.archive-item:hover .a-link { opacity: 1; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   作者
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.author-wrap { padding: 52px 0 80px; }
+.author-card {
+  max-width: 640px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 40px 48px;
+}
+.author-card h2 {
+  font-family: var(--font-serif);
+  font-size: 22px; font-weight: 700;
+  margin-bottom: 4px;
+}
+.author-card .author-kana {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--sub);
+  letter-spacing: .12em; margin-bottom: 24px;
+}
+.author-card p {
+  font-size: 13px; line-height: 2;
+  color: var(--sub); margin-bottom: 16px;
+}
+.author-links {
+  display: flex; gap: 12px; margin-top: 32px;
+}
+.author-link-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 20px;
+  border: 1.5px solid var(--line);
+  border-radius: 4px; text-decoration: none;
+  font-size: 12px; color: var(--sub);
+  transition: all .2s;
+}
+.author-link-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   タグバッジ
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.tag-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 10px;
+  letter-spacing: .04em;
+  font-family: var(--font-sans);
+}
+.tag-子ども  { background: var(--tag-child);   color: #7c5c20; }
+.tag-兄妹    { background: var(--tag-sibling);  color: #2e6640; }
+.tag-妻      { background: var(--tag-wife);     color: #8c3040; }
+.tag-家族事件{ background: var(--tag-event);    color: #1a3a7c; }
+.tag-社会    { background: var(--tag-society);  color: #5a2c7c; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   サムネプレースホルダ
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.thumb-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #f4f4f2 0%, #eeeeea 100%);
+}
+.thumb-placeholder .ph-icon {
+  font-size: 28px; opacity: .25;
+}
+.thumb-placeholder .ph-title {
+  font-family: var(--font-serif);
+  font-size: 11px; color: var(--sub);
+  opacity: .7; text-align: center;
+  padding: 0 12px; line-height: 1.5;
+  max-width: 120px;
+}
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   ライトボックス
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.lightbox-overlay {
+  position: fixed; inset: 0; z-index: 400;
+  background: rgba(10,10,8,.95);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s;
+  padding: 60px 16px 52px;
+}
+.lightbox-overlay.open { opacity: 1; pointer-events: all; }
+.lb-img-wrap {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  width: 100%; max-width: 720px; overflow: hidden;
+}
+.lb-img-wrap img {
+  max-width: 100%; max-height: calc(100vh - 120px);
+  object-fit: contain;
+  border-radius: 4px;
+  transition: opacity .2s;
+}
+.lb-close {
+  position: absolute; top: 16px; right: 20px;
+  background: none; border: none;
+  color: rgba(255,255,255,.6); font-size: 22px;
+  cursor: pointer; transition: color .2s; line-height: 1;
+}
+.lb-close:hover { color: #fff; }
+.lb-prev, .lb-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.08); border: none;
+  color: rgba(255,255,255,.7); font-size: 40px; line-height: 1;
+  width: 48px; height: 64px; cursor: pointer;
+  border-radius: 4px; transition: background .2s, color .2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.lb-prev { left: 12px; }
+.lb-next { right: 12px; }
+.lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,.18); color: #fff; }
+.lb-prev.hidden, .lb-next.hidden { opacity: 0; pointer-events: none; }
+.lb-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 16px;
+  background: rgba(0,0,0,.5);
+}
+.lb-info #lb-title {
+  font-family: var(--font-serif); font-size: 13px;
+  color: rgba(255,255,255,.8); flex: 1;
+}
+.lb-info #lb-counter {
+  font-family: var(--font-mono); font-size: 11px;
+  color: rgba(255,255,255,.4);
+}
+.lb-info #lb-note-link {
+  font-size: 11px; color: rgba(255,255,255,.5);
+  text-decoration: none; transition: color .2s;
+  white-space: nowrap;
+}
+.lb-info #lb-note-link:hover { color: #fff; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   モーダル
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(20,20,18,.7);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--white);
+  border-radius: 10px; overflow: hidden;
+  width: 100%; max-width: 480px;
+  max-height: 90vh; overflow-y: auto;
+  transform: translateY(12px);
+  transition: transform .25s;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-thumb {
+  aspect-ratio: 1/1; background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+}
+.modal-body { padding: 28px 32px 32px; }
+.modal-body .tag-badge { margin-bottom: 10px; }
+.modal-body h2 {
+  font-family: var(--font-serif);
+  font-size: 20px; font-weight: 600;
+  line-height: 1.5; margin-bottom: 12px;
+}
+.modal-meta {
+  display: flex; gap: 12px; align-items: center; margin-bottom: 24px;
+}
+.modal-meta .date { font-family: var(--font-mono); font-size: 12px; color: var(--sub); }
+.modal-meta .no   { font-family: var(--font-mono); font-size: 11px; color: var(--line); border: 1px solid var(--line); padding: 2px 8px; border-radius: 3px; }
+.modal-actions { display: flex; gap: 10px; }
+.btn-close {
+  padding: 8px 16px; border: 1.5px solid var(--line);
+  background: none; border-radius: 4px;
+  font-size: 12px; color: var(--sub); cursor: pointer;
+  transition: all .2s; font-family: var(--font-sans);
+}
+.btn-close:hover { border-color: var(--ink); color: var(--ink); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   フッター
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 32px 24px;
+  text-align: center;
+  color: var(--sub);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  letter-spacing: .06em;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   アニメーション
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp .4s ease both; }
+.fade-up-d1 { animation-delay: .05s; }
+.fade-up-d2 { animation-delay: .10s; }
+.fade-up-d3 { animation-delay: .15s; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   レスポンシブ
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 768px) {
+  .home-hero-inner { grid-template-columns: 1fr; gap: 32px; }
+  .home-nav-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: fixed; top: var(--nav-h); left: 0; right: 0;
+    background: var(--bg); border-bottom: 1px solid var(--line);
+    padding: 16px 24px; gap: 2px; z-index: 99;
+  }
+  .hamburger { display: flex; }
+  .archive-item .a-no,
+  .archive-item .a-date { display: none; }
+  .author-card { padding: 28px 24px; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+}
+@media (max-width: 480px) {
+  .home-nav-grid { grid-template-columns: repeat(2,1fr); gap: 8px; }
+  .home-nav-card { padding: 20px 14px; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   リーダーページ（漫画閲覧）
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.reader-overlay {
+  position: fixed; inset: 0;
+  z-index: 150;
+  background: #f0f0ee;
+  overflow-y: auto;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s;
+  padding-top: var(--nav-h);
+}
+.reader-overlay.open {
+  opacity: 1; pointer-events: all;
+}
+.reader-header {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(240,240,238,.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 20px;
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.reader-header-left {
+  display: flex; align-items: center; gap: 12px; min-width: 0;
+}
+.reader-back {
+  background: none; border: none;
+  font-size: 20px; cursor: pointer;
+  color: var(--ink); padding: 4px 8px 4px 0;
+  flex-shrink: 0; line-height: 1;
+  transition: opacity .2s;
+}
+.reader-back:hover { opacity: .6; }
+.reader-header-title {
+  font-family: var(--font-serif);
+  font-size: 14px; font-weight: 600;
+  white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reader-header-meta {
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+}
+.reader-header-meta .tag-badge { flex-shrink: 0; }
+.reader-header-meta .r-date {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--sub);
+  white-space: nowrap;
+}
+.reader-body {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 16px 80px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0;
+}
+.reader-body img {
+  width: 100%;
+  display: block;
+}
+.reader-footer {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px 64px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 16px;
+}
+.reader-nav {
+  display: flex; gap: 10px; width: 100%;
+}
+.reader-nav-btn {
+  flex: 1; padding: 12px;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  border-radius: 6px; cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: 13px; color: var(--sub);
+  transition: all .2s;
+  text-align: center; line-height: 1.5;
+}
+.reader-nav-btn:hover { border-color: var(--ink); color: var(--ink); }
+.reader-nav-btn.disabled { opacity: .3; pointer-events: none; }
+.reader-nav-btn .nav-label {
+  font-family: var(--font-mono);
+  font-size: 10px; display: block;
+  margin-bottom: 2px; color: var(--sub);
+}
+.reader-nav-btn .nav-title {
+  font-size: 12px; display: block;
+  white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.characters-wrap { margin-top: 8px; }
+.author-comics { margin-top: 40px; }
+.author-comics-title {
+  font-family: var(--font-serif);
+  font-size: 15px; font-weight: 600;
+  color: var(--ink); margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.author-comics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (max-width: 480px) {
+  .author-comics-grid { grid-template-columns: 1fr; }
+}
+.author-comic-card {
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .2s;
+  background: var(--white);
+}
+.author-comic-card:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,.08);
+}
+.author-comic-thumb {
+  width: 100%; aspect-ratio: 1/1;
+  overflow: hidden; position: relative;
+  background: var(--bg);
+}
+.author-comic-thumb img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.author-comic-label {
+  padding: 10px 12px;
+  font-family: var(--font-serif);
+  font-size: 12px; color: var(--sub);
+  line-height: 1.5;
+}
+
+/* 登場人物 縦並び */
+.character-section {
+  margin-bottom: 56px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--line);
+}
+.character-section:last-child {
+  border-bottom: none;
+}
+.character-name-label {
+  font-family: var(--font-serif);
+  font-size: 11px; letter-spacing: .12em;
+  color: var(--sub); text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.character-name {
+  font-family: var(--font-serif);
+  font-size: 24px; font-weight: 700;
+  color: var(--ink); margin-bottom: 16px;
+}
+.character-desc {
+  font-size: 14px; color: var(--sub);
+  line-height: 2; margin-bottom: 24px;
+}
+.character-comic-img {
+  width: 100%; display: block;
+  border-radius: 4px;
+  cursor: zoom-in;
+}
+
+/* トップへ戻るボタン */
+.btn-scroll-top {
+  position: fixed;
+  bottom: 32px; right: 24px;
+  z-index: 180;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--bg);
+  border: none; cursor: pointer;
+  font-size: 18px; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,.2);
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s, transform .3s;
+  transform: translateY(8px);
+}
+.btn-scroll-top.visible {
+  opacity: 1; pointer-events: all;
+  transform: translateY(0);
+}
+.btn-scroll-top:hover {
+  background: #444;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   プロフィールページ
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.profile-wrap { padding: 52px 0 80px; }
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: 560px;
+}
+.profile-photo {
+  width: 100%; max-width: 420px;
+  border-radius: 6px;
+  background: var(--line);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  grid-column: 1 / -1;
+  margin-bottom: 8px;
+}
+.profile-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.profile-photo-placeholder {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8px; color: var(--sub);
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: .08em; text-align: center;
+}
+.profile-name {
+  font-family: var(--font-serif);
+  font-size: 26px; font-weight: 700;
+  letter-spacing: .04em; margin-bottom: 4px;
+}
+.profile-name-sub {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--sub);
+  letter-spacing: .14em; margin-bottom: 28px;
+}
+.profile-body p {
+  font-size: 13px; line-height: 2.1;
+  color: var(--sub); margin-bottom: 14px;
+}
+.profile-body p strong { color: var(--ink); font-weight: 500; }
+.profile-divider {
+  border: none; border-top: 1px solid var(--line);
+  margin: 32px 0;
+}
+.profile-skills-label {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .12em;
+  color: var(--sub); text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.profile-skills-list {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.skill-tag {
+  padding: 6px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 3px;
+  font-size: 12px; color: var(--sub);
+  font-family: var(--font-sans);
+  letter-spacing: .03em;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   MaKiTylページ
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.makityl-wrap { padding: 52px 0 80px; max-width: 680px; }
+.makityl-logo {
+  font-family: var(--font-mono);
+  font-size: 13px; letter-spacing: .22em;
+  color: var(--sub); margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.makityl-name {
+  font-family: var(--font-serif);
+  font-size: 36px; font-weight: 700;
+  letter-spacing: .04em; margin-bottom: 4px;
+}
+.makityl-yomi {
+  font-family: var(--font-mono);
+  font-size: 12px; color: var(--sub);
+  letter-spacing: .1em; margin-bottom: 40px;
+}
+.makityl-section { margin-bottom: 48px; }
+.makityl-section-label {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .15em;
+  color: var(--sub); text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.makityl-vision {
+  font-family: var(--font-serif);
+  font-size: 18px; font-weight: 600;
+  line-height: 2; color: var(--ink);
+  margin-bottom: 16px;
+}
+.makityl-section p {
+  font-size: 13px; line-height: 2.1;
+  color: var(--sub); margin-bottom: 12px;
+}
+.makityl-note {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--sub);
+  border-left: 2px solid var(--line);
+  padding-left: 16px; margin-top: 24px;
+  line-height: 1.9;
+}
+.makityl-contact {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 8px;
+  padding: 12px 28px;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  font-size: 13px; color: var(--ink);
+  text-decoration: none;
+  transition: background .2s, color .2s;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  background: none;
+}
+.makityl-contact:hover { background: var(--ink); color: var(--white); }
+
+.contact-form { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+.contact-field { display: flex; flex-direction: column; gap: 6px; }
+.contact-field label {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .1em;
+  color: var(--sub); text-transform: uppercase;
+}
+.contact-field input,
+.contact-field textarea {
+  font-family: var(--font-sans);
+  font-size: 13px; color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color .2s;
+  width: 100%;
+  resize: vertical;
+}
+.contact-field input:focus,
+.contact-field textarea:focus { border-color: var(--ink); }
+.contact-field input::placeholder,
+.contact-field textarea::placeholder { color: var(--line); }
+
+/* タッチデバイスのホバー残留を防ぐ */
+@media (hover: none) {
+  .archive-item:hover,
+  .comic-card:hover,
+  .character-card:hover,
+  .home-nav-card:hover,
+  .author-comic-card:hover,
+  .reader-nav-btn:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--line);
+    background: transparent;
+  }
+  .archive-item { -webkit-tap-highlight-color: transparent; }
+  .comic-card   { -webkit-tap-highlight-color: transparent; }
+}
+</style>
+</head>
+<body>
+
+<!-- ナビ -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" onclick="showPage('home')">
+      てつやま四季<span>4コマ漫画アーカイブ</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a onclick="showPage('theme')"   id="nav-theme">テーマから読む</a></li>
+      <li><a onclick="showPage('archive')" id="nav-archive">年代アーカイブ</a></li>
+      <li><a onclick="showPage('characters')" id="nav-characters">登場人物</a></li>
+      <li><a onclick="showPage('profile')" id="nav-profile">自己紹介</a></li>
+      <li><a onclick="showPage('makityl')" id="nav-makityl">MaKiTyl</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ━━ HOME ━━ -->
+<div class="page active" id="page-home">
+  <div class="container">
+    <div class="home-hero fade-up">
+      <div class="home-hero-inner">
+        <div class="home-hero-text">
+          <h1>
+            <em>TETSUYAMA SHIKI</em>
+            家族の日常、<br>4コマで。
+          </h1>
+          <p>沖縄の元公務員・創作紙芝居師てつやま四季が描く、笑いと愛にあふれた家族の記録。2021年から続く278作品のアーカイブ。</p>
+          <div class="home-stats">
+            <div class="home-stat-item">
+              <span class="num" id="stat-total">278</span>
+              <span class="lbl">WORKS</span>
+            </div>
+            <div class="home-stat-item">
+              <span class="num" id="stat-years">5</span>
+              <span class="lbl">YEARS</span>
+            </div>
+            <div class="home-stat-item">
+              <span class="num">5</span>
+              <span class="lbl">THEMES</span>
+            </div>
+          </div>
+        </div>
+        <div id="home-latest-card" class="latest-card fade-up fade-up-d1"></div>
+      </div>
+    </div>
+
+    <div class="home-nav-grid fade-up fade-up-d2">
+
+      <div class="home-nav-card" ontouchstart="" onclick="showPage('theme')">
+        <span class="icon">🏷</span>
+        <h3>テーマから読む</h3>
+        <p>子ども・兄妹・妻・家族・社会</p>
+      </div>
+      <div class="home-nav-card" ontouchstart="" onclick="showPage('archive')">
+        <span class="icon">📅</span>
+        <h3>年代アーカイブ</h3>
+        <p>2021年〜全作品一覧</p>
+      </div>
+    </div>
+  </div>
+  <footer>© てつやま四季 — <a href="https://note.com/tetsuyama4ki" target="_blank" style="color:inherit">note.com/tetsuyama4ki</a></footer>
+</div>
+
+<!-- ━━ 今日の4コマ ━━ -->
+<div class="page" id="page-today">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h1>4コマを読む</h1>
+      <p id="today-subtitle">ランダム</p>
+    </div>
+    <div class="today-wrap">
+      <div class="today-card fade-up fade-up-d1" id="today-card"></div>
+      <div style="text-align:center;margin-top:24px" class="fade-up fade-up-d2">
+        <button class="btn-random" onclick="loadRandom()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          ランダムで別の作品を読む
+        </button>
+      </div>
+
+      <!-- 自己紹介4コマ -->
+      <div class="author-comics fade-up fade-up-d2">
+        <h3 class="author-comics-title">自己紹介4コマ</h3>
+        <div class="author-comics-grid" id="author-comics-grid"></div>
+      </div>
+
+    </div>
+  </div>
+  <footer>© てつやま四季 — <a href="https://note.com/tetsuyama4ki" target="_blank" style="color:inherit">note.com/tetsuyama4ki</a></footer>
+</div>
+
+<!-- ━━ ランダム ━━ -->
+<div class="page" id="page-random">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h1>ランダムで読む</h1>
+      <p>278作品からひとつをおまかせで</p>
+    </div>
+    <div class="random-wrap">
+      <div class="random-card fade-up fade-up-d1" id="random-card"></div>
+      <button class="btn-random fade-up fade-up-d2" onclick="loadRandom()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        別の作品を表示
+      </button>
+    </div>
+  </div>
+  <footer>© てつやま四季 — <a href="https://note.com/tetsuyama4ki" target="_blank" style="color:inherit">note.com/tetsuyama4ki</a></footer>
+</div>
+
+<!-- ━━ テーマから読む ━━ -->
+<div class="page" id="page-theme">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h1>テーマから読む</h1>
+      <p>タグで作品を絞り込む</p>
+    </div>
+    <div class="theme-tags-bar fade-up fade-up-d1" id="theme-filters"></div>
+    <div class="cards-grid fade-up fade-up-d2" id="theme-grid"></div>
+  </div>
+  <footer>© てつやま四季 — <a href="https://note.com/tetsuyama4ki" target="_blank" style="color:inherit">note.com/tetsuyama4ki</a></footer>
+</div>
+
+<!-- ━━ 年代アーカイブ ━━ -->
+<div class="page" id="page-archive">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h1>年代アーカイブ</h1>
+      <p>2021年から全278作品</p>
+    </div>
+    <div class="archive-year-tabs fade-up fade-up-d1" id="year-tabs"></div>
+    <div class="fade-up fade-up-d2" id="archive-content"></div>
+  </div>
+  <footer>© てつやま四季 — <a href="https://note.com/tetsuyama4ki" target="_blank" style="color:inherit">note.com/tetsuyama4ki</a></footer>
+</div>
+
+<!-- ━━ 登場人物 ━━ -->
+<div class="page" id="page-characters">
+  <div class="container" style="max-width:640px">
+    <div class="section-header fade-up">
+      <h1>登場人物</h1>
+      <p>家族を紹介します</p>
+    </div>
+    <div id="characters-list"></div>
+  </div>
+  <footer>© てつやま四季 — <a href="https://note.com/tetsuyama4ki" target="_blank" style="color:inherit">note.com/tetsuyama4ki</a></footer>
+</div>
+
+<!-- ━━ 自己紹介 ━━ -->
+<div class="page" id="page-profile">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h1>自己紹介</h1>
+      <p>てつやまについて</p>
+    </div>
+    <div class="profile-wrap">
+      <div class="profile-grid fade-up fade-up-d1">
+        <div class="profile-photo">
+          <img src="profile.jpeg" alt="眞志喜徹也と家族">
+        </div>
+        <div class="profile-body">
+          <div class="profile-name">眞志喜 徹也</div>
+          <div class="profile-name-sub">MASHIKI TETSUYA / てつやま</div>
+          <p>沖縄県出身・在住。元公務員。<br>
+          2025年3月、15年以上務めた公務員を退職し、<strong>描くことと学ぶことを仕事にする</strong>道へ。</p>
+          <p>子どもの頃から絵やマンガを描くことが好きで、ブレイクダンスにも取り組んだ経験を持つ。「対等な目線」と「リベラルアーツ（深い教養）」を創作の根っこに置き、絵・マンガ・紙芝居を通じて世の中と関わっていきたいと思っている。</p>
+          <p>家族は妻、長男・次男・長女の5人。家族の日常を4コマ漫画として描き続けて5年、278作品。</p>
+          <hr class="profile-divider">
+          <div class="profile-skills-label">できること</div>
+          <div class="profile-skills-list">
+            <span class="skill-tag">ポスター制作</span>
+            <span class="skill-tag">イラスト・絵</span>
+            <span class="skill-tag">マンガ制作</span>
+            <span class="skill-tag">絵本制作</span>
+            <span class="skill-tag">紙芝居制作・上演</span>
+          </div>
+        </div>
+      </div>
+      <div class="author-comics fade-up fade-up-d2" style="max-width:560px;margin-top:48px">
+        <h3 class="author-comics-title">自己紹介4コマ</h3>
+        <div class="author-comics-grid" id="author-comics-grid"></div>
+      </div>
+    </div>
+  </div>
+  <footer>© てつやま四季 — <a href="https://note.com/tetsuyama4ki" target="_blank" style="color:inherit">note.com/tetsuyama4ki</a></footer>
+</div>
+
+<!-- ━━ MaKiTyl ━━ -->
+<div class="page" id="page-makityl">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h1>MaKiTyl</h1>
+      <p>屋号・活動理念</p>
+    </div>
+    <div class="makityl-wrap fade-up fade-up-d1">
+      <div class="makityl-logo">屋号</div>
+      <div class="makityl-name">MaKiTyl</div>
+      <div class="makityl-yomi">マキティル</div>
+
+      <div class="makityl-section">
+        <div class="makityl-section-label">Vision</div>
+        <div class="makityl-vision">
+          世の中のすべての仕事に、リスペクトを。<br>
+          子どもたちが、働くことに夢中になれる社会へ。
+        </div>
+        <p>土木作業員、保育士、農家、漁師——どんな仕事も、誰かの暮らしを支えている。でもその多くは、子どもたちの目に届きにくい。</p>
+        <p>絵と物語の力で、「見えにくい仕事」に光を当てたい。それがMaKiTylの出発点です。</p>
+      </div>
+
+      <div class="makityl-section">
+        <div class="makityl-section-label">Concept</div>
+        <p>「対等に学ぶ」をすべての活動の軸に置いています。教える側と教わる側ではなく、絵本や紙芝居を通じて、子どもも大人も同じ地平に立って考える場をつくりたい。</p>
+        <p>沖縄にルーツを持つ者として、ウチナーの精神——つながりと対等性——を創作に織り込んでいきたいと思っています。</p>
+        <div class="makityl-note">
+          ※ 屋号「MaKiTyl（マキティル）」は現在登録中の名称です。<br>
+          ウチナーグチ（沖縄方言）での新たな表現を探求しており、今後変更する予定があります。
+        </div>
+      </div>
+
+      <div class="makityl-section">
+        <div class="makityl-section-label">Contact</div>
+        <p>ポスター、イラスト、マンガ、絵本制作のご相談も受け付けています。まずは気軽にお声がけください。</p>
+        <form action="https://formspree.io/f/mqeyyzao" method="POST" class="contact-form">
+          <div class="contact-field">
+            <label>お名前</label>
+            <input type="text" name="name" placeholder="山田 太郎" required>
+          </div>
+          <div class="contact-field">
+            <label>メールアドレス</label>
+            <input type="email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="contact-field">
+            <label>お問い合わせ内容</label>
+            <textarea name="message" rows="5" placeholder="ご依頼・ご相談の内容をお書きください" required></textarea>
+          </div>
+          <button type="submit" class="makityl-contact">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            送信する
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <footer>© てつやま四季 — <a href="https://note.com/tetsuyama4ki" target="_blank" style="color:inherit">note.com/tetsuyama4ki</a></footer>
+</div>
+
+<!-- トップへ戻るボタン -->
+<button class="btn-scroll-top" id="btn-scroll-top" onclick="scrollToTop()" title="トップへ戻る">↑</button>
+
+<!-- リーダー（漫画閲覧ページ） -->
+<div class="reader-overlay" id="reader">
+  <div class="reader-header">
+    <div class="reader-header-left">
+      <button class="reader-back" onclick="closeReader()">←</button>
+      <span class="reader-header-title" id="reader-title"></span>
+    </div>
+    <div class="reader-header-meta">
+      <div id="reader-tag"></div>
+      <span class="r-date" id="reader-date"></span>
+    </div>
+  </div>
+  <div class="reader-body" id="reader-body"></div>
+  <div class="reader-footer">
+    <div class="reader-nav" id="reader-nav"></div>
+    <div style="display:flex;gap:10px;width:100%;margin-top:4px">
+      <button class="reader-nav-btn" onclick="closeReader()" style="flex:none;padding:12px 20px;width:auto">
+        ← 一覧へ戻る
+      </button>
+      <a class="btn-note" id="reader-note-link" href="#" target="_blank"
+        style="flex:1;justify-content:center;padding:12px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        noteで読む
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ライトボックス（全体画像表示） -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-prev" id="lb-prev" onclick="lbPrev(event)">&#8249;</button>
+  <div class="lb-img-wrap">
+    <img id="lb-img" src="" alt="" onclick="event.stopPropagation()">
+  </div>
+  <button class="lb-next" id="lb-next" onclick="lbNext(event)">&#8250;</button>
+  <div class="lb-info">
+    <span id="lb-title"></span>
+    <span id="lb-counter"></span>
+    <a id="lb-note-link" href="#" target="_blank" onclick="event.stopPropagation()">noteで読む →</a>
+  </div>
+</div>
+
+<!-- モーダル（作品詳細） -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal" id="modal-inner">
+    <div class="modal-thumb" id="modal-thumb" style="cursor:zoom-in" onclick="openReader(readerComicId || currentComicId)"></div>
+    <div class="modal-body">
+      <div id="modal-tag"></div>
+      <h2 id="modal-title"></h2>
+      <div class="modal-meta">
+        <span class="date" id="modal-date"></span>
+        <span class="no"  id="modal-no"></span>
+      </div>
+      <p style="font-size:11px;color:var(--sub);margin-bottom:16px">
+        👆 画像をタップすると大きく表示されます
+      </p>
+      <div class="modal-actions">
+        <a class="btn-note" id="modal-link" href="#" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          noteで読む
+        </a>
+        <button class="btn-close" onclick="closeModal()">閉じる</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="comics_data.js"></script>
+<script>
+// ━━━━━━━━ ユーティリティ ━━━━━━━━
+const TAG_LABEL = {'長男':'長男','次男':'次男','長女':'長女','妻':'妻','社会':'社会'};
+
+function tagBadge(tag) {
+  return `<span class="tag-badge tag-${tag}">${TAG_LABEL[tag]||tag}</span>`;
+}
+
+function thumbPlaceholder(title) {
+  return `<div class="thumb-placeholder">
+    <span class="ph-icon">🖊</span>
+    <span class="ph-title">${title}</span>
+  </div>`;
+}
+
+// 画像あり→img要素、なし→プレースホルダー
+function thumbImg(comic) {
+  return `<img
+    data-src="images/${comic.img || comic.no + '.jpg'}"
+    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+    alt="${comic.title}"
+    style="width:100%;height:100%;object-fit:cover;display:block"
+    onerror="this.style.display='none';this.nextElementSibling&&(this.nextElementSibling.style.display='flex')"
+    loading="lazy"
+  /><div class="thumb-placeholder" style="display:none;width:100%;height:100%;position:absolute;inset:0">
+    <span class="ph-icon">🖊</span>
+    <span class="ph-title">${comic.title}</span>
+  </div>`;
+}
+
+function formatDate(d) {
+  const [y,m,day] = d.split('-');
+  return `${y}年${parseInt(m)}月${parseInt(day)}日`;
+}
+
+// ━━━━━━━━ ページ切替 ━━━━━━━━
+function showPage(id) {
+  // リーダーが開いていたら閉じる
+  document.getElementById('reader').classList.remove('open');
+  document.body.style.overflow = '';
+
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const navEl = document.getElementById('nav-'+id);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo(0,0);
+
+  // 各ページの初期化
+  if (id === 'today')   { loadRandom(); }
+  if (id === 'theme')   { renderTheme('長男'); lazyLoadImages(); }
+  if (id === 'archive') { renderArchive(); lazyLoadImages(); }
+  if (id === 'profile') { renderAuthorComics(); }
+  if (id === 'characters') { renderCharacters(); setTimeout(lazyLoadImages, 50); }
+
+
+  // メニューを閉じる
+  document.getElementById('navLinks').classList.remove('open');
+}
+
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// ━━━━━━━━ HOME ━━━━━━━━
+function renderHome() {
+  const c = COMICS[Math.floor(Math.random() * COMICS.length)];
+  document.getElementById('home-latest-card').innerHTML = `
+    <div class="latest-card-thumb" style="position:relative;cursor:pointer">${thumbImg(c)}</div>
+    <div class="latest-card-body">
+      ${tagBadge(c.tag)}
+      <h2>${c.title}</h2>
+      <div class="latest-card-meta">
+        <span class="date">${formatDate(c.date)}</span>
+        <button class="btn-note" onclick="openReader(${c.id})">
+          📖 読む
+        </button>
+      </div>
+    </div>`;
+  document.getElementById('home-latest-card')
+    .querySelector('.latest-card-thumb')
+    .addEventListener('click', () => openReader(c.id));
+}
+
+// ━━━━━━━━ 今日の4コマ（最新作） ━━━━━━━━
+// ━━━━━━━━ 4コマを読む（最新 or ランダム） ━━━━━━━━
+function renderComic(c, subtitle) {
+  document.getElementById('today-subtitle').textContent = subtitle;
+  const card = document.getElementById('today-card');
+  card.innerHTML = `
+    <div class="today-card-thumb" style="position:relative;cursor:zoom-in">
+      ${thumbImg(c)}
+    </div>
+    <div class="today-card-body">
+      ${tagBadge(c.tag)}
+      <h2>${c.title}</h2>
+      <div class="today-meta">
+        <span class="date">${formatDate(c.date)}</span>
+        <span class="no">No.${c.no}</span>
+      </div>
+      <p style="font-size:11px;color:var(--sub);margin-bottom:16px">👆 画像をタップすると大きく表示されます</p>
+      <a class="btn-note" href="${c.url}" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        noteで読む
+      </a>
+    </div>`;
+  card.querySelector('.today-card-thumb').addEventListener('click', () => openReader(c.id));
+}
+
+function renderToday() {
+  const c = COMICS[COMICS.length - 1];
+  renderComic(c, '最新作品');
+}
+
+function loadRandom() {
+  const c = COMICS[Math.floor(Math.random() * COMICS.length)];
+  renderComic(c, 'ランダム — ' + c.date);
+}
+
+// ━━━━━━━━ テーマから読む ━━━━━━━━
+const TAGS_ALL = ['長男','次男','長女','妻','社会'];
+let currentTag = '長男';
+
+function renderTheme(tag) {
+  currentTag = tag;
+
+  // フィルターボタン
+  const tagCounts = {};
+  COMICS.forEach(c => { tagCounts[c.tag] = (tagCounts[c.tag]||0)+1; });
+  const bar = document.getElementById('theme-filters');
+  bar.innerHTML = TAGS_ALL.map(t => {
+    const cnt = t === '全て' ? COMICS.length : (tagCounts[t]||0);
+    return `<button class="theme-filter-btn ${t===tag?'active':''}"
+      ontouchstart="" onclick="renderTheme('${t}')">${TAG_LABEL[t]||t}<span class="theme-count">${cnt}</span></button>`;
+  }).join('');
+
+  // カード
+  const filtered = (tag === '全て' ? COMICS : COMICS.filter(c => c.tag === tag)).slice().reverse();
+  currentFilteredIds = filtered.map(c => c.id);
+  document.getElementById('theme-grid').innerHTML = filtered.map(c => `
+    <div class="comic-card" onclick="openReader(${c.id}, currentFilteredIds)">
+      <div class="comic-card-thumb">
+        <div style="position:relative;width:100%;height:100%">${thumbImg(c)}</div>
+        <span class="thumb-no">${c.no}</span>
+      </div>
+      <div class="comic-card-body">
+        ${tagBadge(c.tag)}
+        <h3>${c.title}</h3>
+        <div class="card-date">${c.date}</div>
+      </div>
+    </div>`).join('');
+  setTimeout(lazyLoadImages, 50);
+}
+
+// ━━━━━━━━ 年代アーカイブ ━━━━━━━━
+const YEARS = ['2021','2023','2024','2025','2026'];
+let currentYear = '2026';
+
+function renderArchive(year) {
+  if (year) currentYear = year;
+
+  // タブ
+  document.getElementById('year-tabs').innerHTML = YEARS.map(y => {
+    const cnt = COMICS.filter(c=>c.year===y).length;
+    return `<button class="year-tab ${y===currentYear?'active':''}"
+      ontouchstart="" onclick="renderArchive('${y}')">${y}<span style="font-family:var(--font-mono);font-size:10px;color:var(--sub);margin-left:6px">${cnt}</span></button>`;
+  }).join('');
+
+  // 月別グループ
+  const yearComics = COMICS.filter(c => c.year === currentYear);
+  const byMonth = {};
+  yearComics.forEach(c => {
+    const m = c.date.slice(0,7);
+    if (!byMonth[m]) byMonth[m] = [];
+    byMonth[m].push(c);
+  });
+
+  const allArchiveComics = yearComics;
+  currentArchiveIds = allArchiveComics.map(c => c.id);
+  document.getElementById('archive-content').innerHTML =
+    Object.entries(byMonth).sort().reverse().map(([ym, list]) => {
+      const [y,m] = ym.split('-');
+      return `<div class="archive-month-section">
+        <div class="archive-month-label">${y}年 ${parseInt(m)}月 — ${list.length}作品</div>
+        <div class="archive-list">
+          ${list.map(c => `
+            <div class="archive-item" onclick="openReader(${c.id}, currentArchiveIds)">
+              <span class="a-no">${c.no}</span>
+              <span class="a-date">${c.date}</span>
+              <span class="a-title">${c.title}</span>
+              ${tagBadge(c.tag)}
+              <a class="a-link" href="${c.url}" target="_blank" onclick="event.stopPropagation()">note →</a>
+            </div>`).join('')}
+        </div>
+      </div>`;
+    }).join('');
+  setTimeout(lazyLoadImages, 50);
+}
+
+// ━━━━━━━━ モーダル ━━━━━━━━
+let currentComicId = null;
+
+function openModal(id) {
+  currentComicId = id;
+  const c = COMICS.find(x => x.id === id);
+  if (!c) return;
+  document.getElementById('modal-thumb').innerHTML = `<div style="position:relative;width:100%;height:100%">${thumbImg(c)}</div>`;
+  document.getElementById('modal-tag').innerHTML     = tagBadge(c.tag);
+  document.getElementById('modal-title').textContent = c.title;
+  document.getElementById('modal-date').textContent  = formatDate(c.date);
+  document.getElementById('modal-no').textContent    = 'No.' + c.no;
+  document.getElementById('modal-link').href = c.url;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal')) return;
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ━━━━━━━━ ライトボックス ━━━━━━━━
+let lbComicId = null;
+let lbIndex   = 0;
+
+function openLightboxFromModal() {
+  if (!currentComicId) return;
+  openLightbox(currentComicId, 0);
+}
+
+function openLightbox(id, startIndex) {
+  lbComicId = id;
+  lbIndex   = startIndex || 0;
+  renderLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+function renderLightbox() {
+  const c = COMICS.find(x => x.id === lbComicId);
+  if (!c) return;
+  const imgs  = c.imgs || [c.img];
+  const total = imgs.length;
+  const imgEl = document.getElementById('lb-img');
+  imgEl.style.opacity = '0';
+  imgEl.src = 'images/' + imgs[lbIndex];
+  imgEl.onload = () => { imgEl.style.opacity = '1'; };
+  imgEl.alt = c.title;
+  document.getElementById('lb-title').textContent   = c.title;
+  document.getElementById('lb-counter').textContent = total > 1 ? `${lbIndex + 1} / ${total}` : '';
+  document.getElementById('lb-note-link').href      = c.url;
+  document.getElementById('lb-prev').classList.toggle('hidden', lbIndex === 0);
+  document.getElementById('lb-next').classList.toggle('hidden', lbIndex >= total - 1);
+}
+
+function lbPrev(e) {
+  e.stopPropagation();
+  if (lbIndex > 0) { lbIndex--; renderLightbox(); }
+}
+function lbNext(e) {
+  e.stopPropagation();
+  const c = COMICS.find(x => x.id === lbComicId);
+  const total = c ? (c.imgs || [c.img]).length : 1;
+  if (lbIndex < total - 1) { lbIndex++; renderLightbox(); }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('reader').classList.contains('open')) {
+    closeReader(); return;
+  }
+  if (document.getElementById('lightbox').classList.contains('open')) {
+    if (e.key === 'ArrowLeft')  lbPrev(e);
+    if (e.key === 'ArrowRight') lbNext(e);
+    if (e.key === 'Escape')     closeLightbox();
+  } else if (e.key === 'Escape') {
+    closeModal();
+  }
+});
+
+
+// ━━━━━━━━ リーダー ━━━━━━━━
+let readerComicId = null;
+// リーダーを開いたときの「戻り先」リスト（テーマ・アーカイブのフィルタ状態を保持）
+let readerList = [];
+
+function openReader(id, list) {
+  readerComicId = id;
+  readerList = list || COMICS.map(c => c.id);
+  const c = COMICS.find(x => x.id === id);
+  if (!c) return;
+
+  // ヘッダ
+  document.getElementById('reader-title').textContent = c.title;
+  document.getElementById('reader-tag').innerHTML     = tagBadge(c.tag);
+  document.getElementById('reader-date').textContent  = formatDate(c.date);
+  document.getElementById('reader-note-link').href    = c.url;
+
+  // 画像を縦並びで表示
+  const imgs = c.imgs || [c.img];
+  document.getElementById('reader-body').innerHTML =
+    imgs.map(fname =>
+      `<img src="images/${fname}" alt="${c.title}" loading="lazy">`
+    ).join('');
+
+  // 前後ナビ
+  const idx  = readerList.indexOf(id);
+  const prev = idx > 0 ? COMICS.find(x => x.id === readerList[idx - 1]) : null;
+  const next = idx < readerList.length - 1 ? COMICS.find(x => x.id === readerList[idx + 1]) : null;
+  document.getElementById('reader-nav').innerHTML = `
+    <button class="reader-nav-btn ${prev ? '' : 'disabled'}"
+      onclick="${prev ? `openReader(${prev.id}, readerList)` : ''}">
+      <span class="nav-label">← 前の作品</span>
+      <span class="nav-title">${prev ? prev.title : '—'}</span>
+    </button>
+    <button class="reader-nav-btn ${next ? '' : 'disabled'}"
+      onclick="${next ? `openReader(${next.id}, readerList)` : ''}">
+      <span class="nav-label">次の作品 →</span>
+      <span class="nav-title">${next ? next.title : '—'}</span>
+    </button>`;
+
+  // 表示
+  document.getElementById('reader').classList.add('open');
+  document.getElementById('reader').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeReader() {
+  document.getElementById('reader').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+
+
+// ━━━━━━━━ 登場人物 ━━━━━━━━
+function renderCharacters() {
+  const list = document.getElementById('characters-list');
+  if (!list) return;
+  list.innerHTML = CHARACTERS.map((ch, i) => `
+    <div class="character-section fade-up" style="animation-delay:${i * 0.08}s">
+      <div class="character-name-label">Character 0${i + 1}</div>
+      <div class="character-name">${ch.name}</div>
+      <div class="character-desc">${ch.desc}</div>
+      <img class="character-comic-img" ontouchstart=""
+        data-src="images/${ch.comicImg}"
+        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+        alt="${ch.name}"
+        loading="lazy"
+        onclick="openLightboxDirect('images/${ch.comicImg}', '${ch.name}')"
+        onerror="this.style.display='none'">
+    </div>`).join('');
+  setTimeout(lazyLoadImages, 50);
+}
+
+function openLightboxDirect(src, title) {
+  const imgEl = document.getElementById('lb-img');
+  imgEl.style.opacity = '0';
+  imgEl.src = src;
+  imgEl.onload = () => { imgEl.style.opacity = '1'; };
+  imgEl.alt = title;
+  document.getElementById('lb-title').textContent = title;
+  document.getElementById('lb-counter').textContent = '';
+  document.getElementById('lb-note-link').style.display = 'none';
+  document.getElementById('lb-prev').classList.add('hidden');
+  document.getElementById('lb-next').classList.add('hidden');
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+// ━━━━━━━━ 作者ページ 自己紹介4コマ ━━━━━━━━
+function renderAuthorComics() {
+  const ids = [191, 209];
+  const grid = document.getElementById('author-comics-grid');
+  if (!grid) return;
+  grid.innerHTML = ids.map(id => {
+    const c = COMICS.find(x => x.id === id);
+    if (!c) return '';
+    return `
+      <div class="author-comic-card" ontouchstart="" onclick="openReader(${c.id})">
+        <div class="author-comic-thumb">
+          <img src="images/${c.img}" alt="${c.title}"
+            onerror="this.style.display='none'"
+            loading="lazy">
+        </div>
+        <div class="author-comic-label">${c.title}</div>
+      </div>`;
+  }).join('');
+}
+// ━━━━━━━━ 登場人物データ ━━━━━━━━
+const CHARACTERS = [
+  {
+    id: 'father',
+    name: '作者（てつやま）',
+    img: '191.jpg',
+    desc: 'この漫画の視点人物です。だいたい汗かいています。試行錯誤こそ人生。',
+    comicImg: '191.jpg'
+  },
+  {
+    id: 'son1',
+    name: '長男',
+    img: '191b.jpg',
+    desc: '2014年4月24日生まれ。下に紹介ありますが、野球は辞めました。猪突猛進野郎',
+    comicImg: '191b.jpg'
+  },
+  {
+    id: 'son2',
+    name: '次男',
+    img: '191c.jpg',
+    desc: '2016年11月9日生まれ。学校キャンセル気味。作者より多くの輪廻転生をしてきた男',
+    comicImg: '191c.jpg'
+  },
+  {
+    id: 'daughter',
+    name: '長女',
+    img: '191d.jpg',
+    desc: '2020年3月6日生まれ。一番幸せな人。',
+    comicImg: '191d.jpg'
+  },
+  {
+    id: 'wife',
+    name: '妻',
+    img: '210.jpg',
+    desc: '実はこの家族の鍵を握る人物。私たちをまだ見ぬ世界へ連れて行ってくれます。',
+    comicImg: '210.jpg'
+  },
+];
+
+let currentCharacterId = null;
+
+
+// ━━━━━━━━ トップへ戻るボタン ━━━━━━━━
+const _scrollBtn = document.getElementById('btn-scroll-top');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    _scrollBtn.classList.add('visible');
+  } else {
+    _scrollBtn.classList.remove('visible');
+  }
+});
+
+// リーダー内スクロールにも対応
+document.getElementById('reader').addEventListener('scroll', function() {
+  if (this.scrollTop > 300) {
+    _scrollBtn.classList.add('visible');
+  } else {
+    _scrollBtn.classList.remove('visible');
+  }
+});
+
+function scrollToTop() {
+  const reader = document.getElementById('reader');
+  if (reader.classList.contains('open')) {
+    reader.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// ━━━━━━━━ 遅延読み込み強化（Intersection Observer） ━━━━━━━━
+const _lazyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      if (img.dataset.src) {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+      }
+      _lazyObserver.unobserve(img);
+    }
+  });
+}, { rootMargin: '400px' });
+
+function lazyLoadImages() {
+  document.querySelectorAll('img[data-src]').forEach(img => {
+    _lazyObserver.observe(img);
+  });
+}
+
+// ━━━━━━━━ タッチ判定（スクロールと区別） ━━━━━━━━
+let _touchStartY = 0;
+let _touchStartX = 0;
+
+document.addEventListener('touchstart', e => {
+  _touchStartY = e.touches[0].clientY;
+  _touchStartX = e.touches[0].clientX;
+}, { passive: true });
+
+document.addEventListener('touchend', e => {
+  const dy = Math.abs(e.changedTouches[0].clientY - _touchStartY);
+  const dx = Math.abs(e.changedTouches[0].clientX - _touchStartX);
+  // 10px以上動いたらスクロールと判断してclickを無効化
+  if (dy > 10 || dx > 10) {
+    e.preventDefault();
+  }
+}, { passive: false });
+
+// タッチデバイスでのhover残留を防ぐ
+document.addEventListener('touchstart', () => {}, { passive: true });
+// ━━━━━━━━ 初期化 ━━━━━━━━
+let currentFilteredIds = COMICS.map(c => c.id);
+let currentArchiveIds  = COMICS.map(c => c.id);
+renderHome();
+showPage('home');
+setTimeout(lazyLoadImages, 100);
+</script>
+</body>
+</html>
