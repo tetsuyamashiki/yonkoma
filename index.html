@@ -1553,7 +1553,7 @@ function renderTheme(tag) {
   }).join('');
 
   // カード
-  const filtered = (tag === '全て' ? COMICS : COMICS.filter(c => c.tag === tag)).slice().reverse();
+  const filtered = (tag === '全て' ? COMICS : COMICS.filter(c => c.tag === tag)).slice().sort((a,b) => b.date.localeCompare(a.date));
   currentFilteredIds = filtered.map(c => c.id);
   document.getElementById('theme-grid').innerHTML = filtered.map(c => `
     <div class="comic-card" onclick="openReader(${c.id}, currentFilteredIds)">
