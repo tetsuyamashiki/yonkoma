@@ -3977,7 +3977,7 @@ const COMICS = [
     "title": "学校が好きなのか嫌いなのか",
     "date": "2025-12-10",
     "year": "2025",
-    "tag": "長男",
+    "tag": "次男",
     "url": "https://note.com/tetsuyama4ki/n/n569d8d9a4c0b",
     "img": "243.jpg",
     "imgs": [
@@ -4193,7 +4193,7 @@ const COMICS = [
     "title": "少し世界史に興味がある9歳次男へ新大陸発見の話をする",
     "date": "2026-02-05",
     "year": "2026",
-    "tag": "社会",
+    "tag": "次男",
     "url": "https://note.com/tetsuyama4ki/n/n2de22d05859d",
     "img": "256.jpg",
     "imgs": [
@@ -4275,7 +4275,7 @@ const COMICS = [
     "title": "9歳次男、世界情勢に怒る。",
     "date": "2026-02-12",
     "year": "2026",
-    "tag": "社会",
+    "tag": "次男",
     "url": "https://note.com/tetsuyama4ki/n/n6745abf60f05",
     "img": "261.jpg",
     "imgs": [
